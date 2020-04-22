@@ -3,9 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>Online Quiz Project</title>
 </head>
 <body>
-    
+    <div class="wrapper">
+        <div id="view-score-box">
+            <a href="scores.html"><span id="view-score-link">View High Scores</span></a>
+        </div>
+
+        <div id="timer-box" class="hide">
+            <p>Timer: <span id="timer-display">0</span></p>
+        </div>
+
+        <section id="main" class="text-align-center">
+            <div id="intro-div">
+                <h1>Coding Quiz Challenge</h1>
+                <p>You have your instructions.  Follow them you maggot.</p>
+                <button id="start-button">Game On</button>
+            </div>
+
+            <div id="question-div-box">
+                <!--
+                <h2 class="question-title">This is the title of a question.  What is the correct answer to what I'm going to ask?</h2>
+                <div id="answer-list">
+                    <button id="answer_0">1.) I'm not really sure.</button>
+                    <button id="answer_1">2.) I have absolutely no idea.</button>
+                    <button id="answer_2">3.) I'm so sure that I know the answer</button>
+                    <button id="answer_3">4.) I'm quiting your game already.</button>
+                </div>
+
+                <div id="answer-response-box" class="hide">
+                    <hr>
+                    <p id="answer-response">Correct!</p>
+                </div>
+                -->
+            </div>
+        </section>
+        
+
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,74 @@
+/* Aligns text to center */
+.text-align-center {
+    text-align: center;
+}
+
+.wrapper {
+    margin: 0px 10px;
+}
+
+/* Sets the main  */
+#main {
+    margin: 100px 50px;
+}
+
+.hide {
+    display: none;
+}
+
+#view-score-box {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    margin: 20px;
+}
+
+#timer-box {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    margin: 20px;  
+    text-align: right;  
+}
+
+#timer-box p {
+    margin: 0px;
+}
+
+#question-div-box {
+    text-align: left;
+    margin: 20px auto;
+    max-width: 700px;
+}
+
+.question-title {
+    margin: 20px auto;
+    font-size: 20px;
+}
+
+#answer-list {
+    font-size: 18px;
+    line-height: 2em;
+}
+
+#answer-list button {
+    border: 0px;
+    background: #3755fd;
+    display: block;
+    margin: 5px 0px;
+    padding: 5px;
+    color: #f3f3f3;
+}
+
+#answer-list button:hover {
+    background: #2943da;
+    
+}
+
+#answer-response-box {
+    margin-top: 20px;
+}
+
+#answer-response {
+    margin: 0px;
+}
