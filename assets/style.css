@@ -72,3 +72,37 @@
 #answer-response {
     margin: 0px;
 }
+
+.flex-center {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px dotted #1495d1;
+    text-align: right;
+    
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #1495d1;
+    color: #fefefe;
+}
+
+td {
+    padding: 5px 5px;
+}
+
+#score-buttons {
+    margin: 20px;
+}
+
+#score-buttons button {
+    margin: 10px;
+}
