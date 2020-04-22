@@ -39,7 +39,11 @@ var storage = {
         {question: `Hi I'm a question 2!  This is the title of a question. `, answer_0: `I'm answer one!`, answer_1: `I'm answer two!`, answer_2: `I'm answer three!`, answer_3: `I'm answer four!`, correct_answer: 1}
     ],
 
-    randomCheckArray: []
+    randomCheckArray: [],
+    gameTimer: 5,
+    score: 0,
+    answersCorrect: 0,
+    answersIncorrect: 0
 }
     
 var html = `<h2 class="question-title">This is the title of a question.  What is the correct answer to what I'm going to ask?</h2><div id="answer-list"><button id="answer_0">1.) I'm not really sure.</button><button id="answer_1">2.) I have absolutely no idea.</button><button id="answer_2">3.) I'm so sure that I know the answer</button><button id="answer_3">4.) I'm quiting your game already.</button></div><div id="answer-response-box" class="hide"><hr><p id="answer-response">Correct!</p></div>`;
@@ -53,7 +57,6 @@ $(document).ready(function() {
         // Pick a random question to start with
         var ranNum = Math.floor(Math.random() * storage.questions.length)
         var startQuestion = storage.questions[ranNum];
-        console.log(startQuestion);
 
         // Store that random number in our randomCheckArray to make sure we don't duplicate questions later
         storage.randomCheckArray.push(ranNum);
@@ -62,11 +65,23 @@ $(document).ready(function() {
         // Generate that question's HTML and append it into the #question-div-box 
         var questionHTML = $('#question-div-box').html(`<h2 class="question-title">${startQuestion.question}</h2><div id="answer-list"><button id="answer_0">1.)  ${startQuestion.answer_0}</button><button id="answer_1">2.)  ${startQuestion.answer_1}</button><button id="answer_2">3.)  ${startQuestion.answer_2}</button><button id="answer_3">4.)  ${startQuestion.answer_3}</button></div><div id="answer-response-box" class="hide"><hr><p id="answer-response">Correct!</p></div>`)
 
-        console.log(questionHTML);
+        // Start a 60 second timer
+        var startTimer = setInterval(function() {
+            $('#timer-display').html(storage.gameTimer);
+            storage.gameTimer--;
+
+            if (storage.gameTimer < -1) {
+                clearInterval(startTimer);
+                alert(`Time's Up!`)  // Make this a pop in modal that displays 'Time's up!' and then displays final score and input for initials
+            }
+        }, 1000)
+
+        // Display timer
+        $('#timer-box').toggle('hide');
+
 
         // Display the #question-div-box
         $('#question-div-box').toggle('hide');
-
     });
 
 
