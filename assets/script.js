@@ -34,9 +34,9 @@
 // Global Variables
 var storage = {
     questions: [
-        {question: `Hi I'm a question 0!  This is the title of a question. `, answer_0: `I'm answer one!`, answer_1: `I'm answer two!`, answer_2: `I'm answer three!`, answer_3: `I'm answer four!`, correct_answer: 'answer_0'},
-        {question: `Hi I'm a question 1!  This is the title of a question. `, answer_0: `I'm answer one!`, answer_1: `I'm answer two!`, answer_2: `I'm answer three!`, answer_3: `I'm answer four!`, correct_answer: 'answer_1'},
-        {question: `Hi I'm a question 2!  This is the title of a question. `, answer_0: `I'm answer one!`, answer_1: `I'm answer two!`, answer_2: `I'm answer three!`, answer_3: `I'm answer four!`, correct_answer: 'answer_2'}
+        {question: `Pickles!  Hi I'm a question 0!  This is the title of a question. `, answer_0: `I'm answer one!`, answer_1: `I'm answer two!`, answer_2: `I'm answer three!`, answer_3: `I'm answer four!`, correct_answer: 'answer_0'},
+        {question: `Man I wish I could eat a sandwich right now.  Hi I'm a question 1!  This is the title of a question. `, answer_0: `I'm answer one!`, answer_1: `I'm answer two!`, answer_2: `I'm answer three!`, answer_3: `I'm answer four!`, correct_answer: 'answer_0'},
+        {question: `Wow my imagination is subpar.  Hi I'm a question 2!  This is the title of a question. `, answer_0: `I'm answer one!`, answer_1: `I'm answer two!`, answer_2: `I'm answer three!`, answer_3: `I'm answer four!`, correct_answer: 'answer_0'}
     ],
 
     randomCheckArray: [],
@@ -47,10 +47,6 @@ var storage = {
     answersIncorrect: 0,
     interval: true //Creating this variable here to reference for our timer intervals
 }
-    
-var html = `<h2 class="question-title">This is the title of a question.  What is the correct answer to what I'm going to ask?</h2><div id="answer-list"><button id="answer_0">1.) I'm not really sure.</button><button id="answer_1">2.) I have absolutely no idea.</button><button id="answer_2">3.) I'm so sure that I know the answer</button><button id="answer_3">4.) I'm quiting your game already.</button></div><div id="answer-response-box" class="hide"><hr><p id="answer-response">Correct!</p></div>`;
-
-
 
 $(document).ready(function() {
     // Functions
@@ -62,13 +58,37 @@ $(document).ready(function() {
 
 
             if (storage.gameTimer <= 10 ) {
-
                 $('#timer-display').css({'color': 'red', 'font-size': '30px'});
             }
+
             if (storage.gameTimer <= 0) {
+                $('#game-over-heading').html(`Time's Up!`);
                 displaySubmitScreen();
             }
         }, 1000);
+    };
+
+    // Render next question function
+    function renderQuestion() {
+        // Generate the next random question by picking a random number
+        var ranNum = Math.floor(Math.random() * storage.questions.length);
+
+        // Check to see if that random number has already been generated
+        while (storage.randomCheckArray.includes(ranNum)) {
+            ranNum = (ranNum + 1) % storage.questions.length;
+        }
+        
+        // Push that random index number into our storage array
+        storage.randomCheckArray.push(ranNum);
+
+        // Set our next question
+        var nextQuestion = storage.questions[ranNum];
+        storage.curQuestion = nextQuestion;
+
+        // Display the next random question
+        var questionBox = document.getElementById('question-div-box');
+
+        questionBox.innerHTML = (`<h2 class="question-title">${nextQuestion.question}</h2><div id="answer-list"><button class="ans-btn" id="answer_0" value="1">1.)  ${nextQuestion.answer_0}</button><button class="ans-btn" id="answer_1">2.)  ${nextQuestion.answer_1}</button><button class="ans-btn" id="answer_2">3.)  ${nextQuestion.answer_2}</button><button class="ans-btn" id="answer_3">4.)  ${nextQuestion.answer_3}</button></div>`);
     };
 
     // Stop game and submit screen function
@@ -82,21 +102,12 @@ $(document).ready(function() {
         $('#question-div-box').toggle('hide');
     }
 
-    // Start Button Event Listener
-    $('#start-button').on('click', function() {
+    // function to initiate the game
+    function startGame() {
         // Hide the start screen
         $('#intro-div').toggle('hide');
         
-        // Pick a random question to start with
-        var ranNum = Math.floor(Math.random() * storage.questions.length)
-        var startQuestion = storage.questions[ranNum];
-        storage.curQuestion = startQuestion;
-
-        // Store that random number in our randomCheckArray to make sure we don't duplicate questions later
-        storage.randomCheckArray.push(ranNum);
-
-        // Generate that question's HTML and append it into the #question-div-box 
-        var questionHTML = $('#question-div-box').html(`<h2 class="question-title">${startQuestion.question}</h2><div id="answer-list"><button class="ans-btn" id="answer_0" value="1">1.)  ${startQuestion.answer_0}</button><button class="ans-btn" id="answer_1">2.)  ${startQuestion.answer_1}</button><button class="ans-btn" id="answer_2">3.)  ${startQuestion.answer_2}</button><button class="ans-btn" id="answer_3">4.)  ${startQuestion.answer_3}</button></div><div id="answer-response-box" class="hide"><hr><p id="answer-response">Correct!</p></div>`)
+        renderQuestion();
 
         // Start a 60 second timer
         startGameTimer();
@@ -107,69 +118,86 @@ $(document).ready(function() {
 
         // Display the #question-div-box
         $('#question-div-box').toggle('hide');
-    });
+    }
 
+    // add answer response function
+    function addResponse(result) {
+        var responseTimerInterval, responseTimer = 1;
+        if (result==="Correct") {
+            // display UI response for correct for 3 seconds
+            $('#answer-response-box').html('<hr><p>Correct!<p>');
+            responseTimerInterval = setInterval(function(){
+                responseTimer--;
+                if (responseTimer === 0) {
+                    $('#answer-response-box').html('');
+                    clearInterval(responseTimerInterval);
+                }
+            }, 1000)
+        } else {
+            // display UI response for incorrect for 3 seconds
+            console.log('wrong');
+            $('#answer-response-box').append('<hr><p>Incorrect!<p>');
+            responseTimerInterval = setInterval(function(){
+                responseTimer--;
+                if (responseTimer === 0) {
+                    $('#answer-response-box').html('');
+                    clearInterval(responseTimerInterval);
+                }
+            }, 1000);
+
+            // stop current timer, subtract gameTimer by 10 sec and immediately display the new time
+            clearInterval(storage.interval)
+            storage.gameTimer -= 10;
+
+            if (storage.gameTimer <= 0) {
+                displaySubmitScreen();
+                $('#game-over-heading').html(`Time's Up!`);
+                return
+            } else {
+                $('#timer-display').html(storage.gameTimer);
+
+                // start the timer again with the new time
+                startGameTimer();
+            }
+        }
+    }
+
+
+    // EVENT LISTENERS
+    //=========================================================
+
+    // Start Button Event Listener
+    $('#start-button').on('click', startGame) 
 
 
     // Question answer buttons Event Listener.  Cannot use jQuery here because we are dynamically generating this HTML
     document.getElementById('question-div-box').addEventListener('click', function(event) {
 
-        
-        // Check to see if the answer was right or wrong, display the response, and affect the timer if answered incorrectly.
+        // make sure the button is clicked
         var buttonClicked = event.target;
-        var responseTimerInterval, responseTimer = 2;
+        
         if (buttonClicked.matches("button")) {
-            console.log('You clicked me successfully!');
+
+            // Check to see if the answer was right or wrong
             if (storage.curQuestion.correct_answer === buttonClicked.id) {
                 // display UI response for correct for 3 seconds
-                $('#answer-response').html('Correct!');
-                $('#answer-response-box').toggle('hide');
-                responseTimerInterval = setInterval(function(){
-                    responseTimer--;
-                    if (responseTimer === 0) {
-                        $('#answer-response-box').toggle('hide');
-                        clearInterval(responseTimerInterval);
-                    }
-                }, 1000)
+                addResponse("Correct");
                 
             } else {
                 // display UI response for incorrect for 3 seconds
-                $('#answer-response').html('Incorrect!');
-                $('#answer-response-box').toggle('hide');
-                responseTimerInterval = setInterval(function(){
-                    responseTimer--;
-                    if (responseTimer === 0) {
-                        $('#answer-response-box').toggle('hide');
-                        clearInterval(responseTimerInterval);
-                    }
-                }, 1000);
-    
-                // subtract gameTimer by 10 sec and immediately display the new time
-                clearInterval(storage.interval)
-                storage.gameTimer -= 10;
-                $('#timer-display').html(storage.gameTimer);
+                addResponse("Incorrect");
+                }
+        };
 
-                // start the timer again with the new time
-                startGameTimer();
-            };
-
-            // Check to see if all questions have been asked
-            if (storage.randomCheckArray.length === storage.questions.length) {
-                displaySubmitScreen();
-                return;
-            }
-
-            // Generate the next random question by picking a random number
-            var ranNum = Math.floor(Math.random() * storage.questions.length);
-
-            // Check to see if that random number has already been generated
-            if (storage.randomCheckArray.includes(ranNum)) {
-                ranNum = Math.floor(((Math.random() * storage.questions.length) + 1) % (storage.questions.length - 1))
-            }
-            var nextQuestion = storage.questions[ranNum]
-    
-            // Display the next random question
+        // if all questions have been answered, display Submit Screen
+        if (storage.randomCheckArray.length === storage.questions.length){
+            displaySubmitScreen();
+            $('#game-over-heading').html('All Questions Answered!');
+            return;
         }
+
+        // Generate the next random question by picking a random number
+        renderQuestion();
     });
 
 });
