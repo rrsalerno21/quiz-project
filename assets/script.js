@@ -97,6 +97,9 @@ $(document).ready(function() {
         clearInterval(storage.interval);
         $('#timer-box').toggle('hide');
 
+        //update final-score
+        $('#final-score').html(`Your Final Score: ${storage.score}`);
+
         // display the submit score screen
         $('#time-up-box').toggle('hide');
         $('#question-div-box').toggle('hide');
@@ -167,7 +170,13 @@ $(document).ready(function() {
     //=========================================================
 
     // Start Button Event Listener
-    $('#start-button').on('click', startGame) 
+    $('#start-button').on('click', startGame);
+    $('#retry-button').on('click', function() {
+        console.log('please dont break me');
+        location.reload(true);
+    });
+    
+
 
 
     // Question answer buttons Event Listener.  Cannot use jQuery here because we are dynamically generating this HTML
@@ -182,11 +191,13 @@ $(document).ready(function() {
             if (storage.curQuestion.correct_answer === buttonClicked.id) {
                 // display UI response for correct for 3 seconds
                 addResponse("Correct");
-                
+                storage.score += 1;
+                storage.answersCorrect += 1;
             } else {
                 // display UI response for incorrect for 3 seconds
                 addResponse("Incorrect");
-                }
+                storage.answersIncorrect += 1;
+            }
         };
 
         // if all questions have been answered, display Submit Screen
