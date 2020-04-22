@@ -65,16 +65,22 @@ $(document).ready(function() {
 
                 $('#timer-display').css({'color': 'red', 'font-size': '30px'});
             }
-            if (storage.gameTimer === 0) {
-                //stop the timer
-                clearInterval(storage.interval);
-
-                // display the submit score screen
-                $('#time-up-box').toggle('hide');
-                $('#question-div-box').toggle('hide');
+            if (storage.gameTimer <= 0) {
+                displaySubmitScreen();
             }
         }, 1000);
     };
+
+    // Stop game and submit screen function
+    function displaySubmitScreen() {
+        //stop the timer and hide the timer
+        clearInterval(storage.interval);
+        $('#timer-box').toggle('hide');
+
+        // display the submit score screen
+        $('#time-up-box').toggle('hide');
+        $('#question-div-box').toggle('hide');
+    }
 
     // Start Button Event Listener
     $('#start-button').on('click', function() {
@@ -145,8 +151,22 @@ $(document).ready(function() {
 
                 // start the timer again with the new time
                 startGameTimer();
+            };
+
+            // Check to see if all questions have been asked
+            if (storage.randomCheckArray.length === storage.questions.length) {
+                displaySubmitScreen();
+                return;
             }
-            // Generate the next random question
+
+            // Generate the next random question by picking a random number
+            var ranNum = Math.floor(Math.random() * storage.questions.length);
+
+            // Check to see if that random number has already been generated
+            if (storage.randomCheckArray.includes(ranNum)) {
+                ranNum = Math.floor(((Math.random() * storage.questions.length) + 1) % (storage.questions.length - 1))
+            }
+            var nextQuestion = storage.questions[ranNum]
     
             // Display the next random question
         }
