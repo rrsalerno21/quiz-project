@@ -40,16 +40,18 @@ var storage = {
     ],
 
     randomCheckArray: [],
-    gameTimer: 5,
+    gameTimer: 15,
     score: 0,
     answersCorrect: 0,
-    answersIncorrect: 0
+    answersIncorrect: 0,
+    interval: true //Creating this variable here to reference for our timer intervals
 }
     
 var html = `<h2 class="question-title">This is the title of a question.  What is the correct answer to what I'm going to ask?</h2><div id="answer-list"><button id="answer_0">1.) I'm not really sure.</button><button id="answer_1">2.) I have absolutely no idea.</button><button id="answer_2">3.) I'm so sure that I know the answer</button><button id="answer_3">4.) I'm quiting your game already.</button></div><div id="answer-response-box" class="hide"><hr><p id="answer-response">Correct!</p></div>`;
 
 
 $(document).ready(function() {
+    // Start Button Event Listener
     $('#start-button').on('click', function() {
         // Hide the start screen
         $('#intro-div').toggle('hide');
@@ -66,13 +68,23 @@ $(document).ready(function() {
         var questionHTML = $('#question-div-box').html(`<h2 class="question-title">${startQuestion.question}</h2><div id="answer-list"><button id="answer_0">1.)  ${startQuestion.answer_0}</button><button id="answer_1">2.)  ${startQuestion.answer_1}</button><button id="answer_2">3.)  ${startQuestion.answer_2}</button><button id="answer_3">4.)  ${startQuestion.answer_3}</button></div><div id="answer-response-box" class="hide"><hr><p id="answer-response">Correct!</p></div>`)
 
         // Start a 60 second timer
-        var startTimer = setInterval(function() {
-            $('#timer-display').html(storage.gameTimer);
+        storage.interval = setInterval(function() {
+            $('#timer-display').css('color', 'inherit');
             storage.gameTimer--;
+            $('#timer-display').html(storage.gameTimer);
+            
 
-            if (storage.gameTimer < -1) {
-                clearInterval(startTimer);
-                alert(`Time's Up!`)  // Make this a pop in modal that displays 'Time's up!' and then displays final score and input for initials
+            if (storage.gameTimer <= 10 ) {
+                
+                $('#timer-display').css({'color': 'red', 'font-size': '30px'});
+            }
+            if (storage.gameTimer === 0) {
+                //stop the timer
+                clearInterval(storage.interval);
+                
+                // display the submit score screen
+                $('#time-up-box').toggle('hide');
+                $('#question-div-box').toggle('hide');
             }
         }, 1000)
 
@@ -84,5 +96,17 @@ $(document).ready(function() {
         $('#question-div-box').toggle('hide');
     });
 
+    // Question answer buttons Event Listener
+    $('#answer-list').on('click', function() {
+        // Check to see if the answer was right or wrong, display the response, and affect the timer if answered incorrectly.
+        var buttonClicked = $(this).attr('id');
+        // Generate the next random question
 
+        // Display the next random question
+    })
+
+        $(this).attr('id');
 });
+
+
+
