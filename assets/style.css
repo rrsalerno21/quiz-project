@@ -95,7 +95,7 @@ th {
     color: #fefefe;
 }
 
-td {
+td, th {
     padding: 5px 5px;
 }
 
@@ -106,3 +106,5 @@ td {
 #score-buttons button {
     margin: 10px;
 }
+
+
