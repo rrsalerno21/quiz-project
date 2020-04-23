@@ -32,7 +32,20 @@
             
 
 // Global Variables
-var storage = {
+var JSONhighScores = JSON.parse(localStorage.getItem('highScoresStored'));
+var storage, highScores;
+
+if (JSONhighScores === null) {
+    highScores = {
+        player_scores: []
+    }
+} else {
+    highScores = {
+        player_scores: JSONhighScores
+    }    
+}
+
+storage = {
     questions: [
         {question: `Pickles!  Hi I'm a question 0!  This is the title of a question. `, answer_0: `I'm answer one!`, answer_1: `I'm answer two!`, answer_2: `I'm answer three!`, answer_3: `I'm answer four!`, correct_answer: 'answer_0'},
         {question: `Man I wish I could eat a sandwich right now.  Hi I'm a question 1!  This is the title of a question. `, answer_0: `I'm answer one!`, answer_1: `I'm answer two!`, answer_2: `I'm answer three!`, answer_3: `I'm answer four!`, correct_answer: 'answer_0'},
@@ -47,13 +60,14 @@ var storage = {
     answersIncorrect: 0,
     interval: true, //Creating this variable here to reference for our timer intervals
     player_scores: []
-}
+}  
+
 
 // Function constructor to record player scores
 function PlayerScore(initials, score) {
     this.initials = initials;
     this.score = score;
-}
+};
 
 
 
@@ -117,6 +131,7 @@ $(document).ready(function() {
     
         // function to initiate the game
         function startGame() {
+
             // Hide the start screen
             $('#intro-div').toggle('hide');
             
@@ -174,6 +189,19 @@ $(document).ready(function() {
                 }
             }
         }
+
+        // function to record a player's score
+        function recordScore() {
+            var inputInitials = $('#initials-input').val();
+            
+            var player = new PlayerScore(inputInitials, storage.score);
+            console.log(player);
+            console.log(highScores.player_scores);
+
+            highScores.player_scores.push(player);
+            localStorage.setItem('highScoresStored', JSON.stringify(highScores.player_scores));
+            
+        }
     
     
         // EVENT LISTENERS
@@ -181,12 +209,19 @@ $(document).ready(function() {
     
         // Start Button Event Listener
         $('#start-button').on('click', startGame);
+
+        // Retry Button Event Listener
         $('#retry-button').on('click', function() {
             console.log('please dont break me');
             location.reload(true);
         });
+
+        // Submit Score Event Listener
+        $('#submit-score-button').on('click', function() {
+            recordScore();
+            window.location.replace("./scores.html");
+        });
         
-    
     
     
         // Question answer buttons Event Listener.  Cannot use jQuery here because we are dynamically generating this HTML
@@ -224,7 +259,40 @@ $(document).ready(function() {
     }
 
     if ($('body').data('title') === 'high-scores-page') {
-        console.log(storage);
+        // get and sort high scores
+        var sortedHighScores = highScores.player_scores.sort(compare);
+        
+        // function used to sort from highest to lowest
+        function compare(a,b) {
+            var scoreA = a.score;
+            var scoreB = b.score;
+
+            let comparison = 0;
+            if (scoreA < scoreB) {
+                comparison = 1;
+            } else if (scoreB < scoreA) {
+                comparison = -1;
+            }
+            return comparison
+        }
+
+        // render high scores on the board
+        function renderHighScores() {
+            sortedHighScores.forEach(function(cur, i) {
+                $('table').append(`<tr><td>${i + 1}</td><td>${cur.initials.toUpperCase()}</td><td>${cur.score}</td></tr>`)
+            }); 
+        }
+
+        // clear local storage function
+        function resetHighScores() {
+            localStorage.clear();
+            location.reload(true);
+        }
+
+        // add event listener to Reset High Score button
+        $('#clear-scores-btn').on('click', resetHighScores);
+
+        renderHighScores();
     }
 });
 
