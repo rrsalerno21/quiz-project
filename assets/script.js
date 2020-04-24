@@ -229,6 +229,7 @@ $(document).ready(function() {
     
             // make sure the button is clicked
             var buttonClicked = event.target;
+            console.log(buttonClicked);
             
             if (buttonClicked.matches("button")) {
     
@@ -243,17 +244,17 @@ $(document).ready(function() {
                     addResponse("Incorrect");
                     storage.answersIncorrect += 1;
                 }
+                // if all questions have been answered, display Submit Screen
+                if (storage.randomCheckArray.length === storage.questions.length){
+                    displaySubmitScreen();
+                    $('#game-over-heading').html('All Questions Answered!');
+                    return;
+                }
+        
+                // Generate the next random question by picking a random number
+                renderQuestion();
             };
     
-            // if all questions have been answered, display Submit Screen
-            if (storage.randomCheckArray.length === storage.questions.length){
-                displaySubmitScreen();
-                $('#game-over-heading').html('All Questions Answered!');
-                return;
-            }
-    
-            // Generate the next random question by picking a random number
-            renderQuestion();
         });
 
     }
