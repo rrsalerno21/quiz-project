@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Comic+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Online Quiz Project</title>
 </head>
 <body data-title="quiz-page">
     <div class="wrapper">
         <div id="view-score-box">
-            <a href="scores.html"><span id="view-score-link">View High Scores</span></a>
+            <a href="scores.html"><span class="btn" id="view-score-link">View High Scores</span></a>
         </div>
 
         <div id="timer-box" class="hide">
@@ -20,8 +22,8 @@
         <section id="main" class="text-align-center">
             <div id="intro-div">
                 <h1>Coding Quiz Challenge</h1>
-                <p>You have your instructions.  Follow them you maggot.</p>
-                <button id="start-button">Game On</button>
+                <p>You have 60 seconds to answer 17 random questions.  You get one point for every question you answer correctly.  Answer incorrectly, and you'll lose 10 seconds.  Good luck!</p>
+                <button id="start-button" class="btn">Game On</button>
             </div>
 
             <div id="time-up-box" class="hide">
@@ -30,10 +32,11 @@
                 <label for="initials">Your Initials</label>
                 <input type="text" id="initials-input" name="initials">
                 &nbsp;
-                <button id="submit-score-button">Submit Score</button>
-                <div>
-                    <button id="retry-button">Retry?</button>
+                <div class="flex-center" id="final-score-buttons"> 
+                    <button class="btn" id="retry-button">Retry?</button>
+                    <button class="btn" id="submit-score-button">Submit Score</button>
                 </div>
+               
             </div>
 
             <div id="question-div-box" class="hide">
@@ -54,6 +57,6 @@
         
 
     </div>
-    <script src="script.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
 </html>

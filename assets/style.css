@@ -1,3 +1,31 @@
+/* Body background */
+body {
+    background-color: #f3f3f3;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1em;
+    line-height: 1.2em;
+}
+
+/* h1 styling and other appropriate header spaces */
+h1, #game-over-heading {
+    line-height: 1.2em;
+    font-size: 1.5em;
+}
+
+/* h2 styling */
+h2 {
+    font-size: 1em
+}
+
+
+/* Remove purple & underline on visited links */
+a:visited, a {
+    color: inherit;
+    text-decoration-line: none;
+}
+
+
+
 /* Aligns text to center */
 .text-align-center {
     text-align: center;
@@ -11,6 +39,8 @@
 #main {
     margin: 100px 50px;
 }
+
+
 
 .hide {
     display: none;
@@ -41,9 +71,14 @@
     max-width: 700px;
 }
 
+#question-div-box button {
+    text-align: left;
+}
+
 .question-title {
     margin: 20px auto;
-    font-size: 20px;
+    font-size: 18px;
+    line-height: 1.2em;
 }
 
 #answer-list {
@@ -52,17 +87,22 @@
 }
 
 #answer-list button {
-    border: 0px;
-    background: #3755fd;
     display: block;
-    margin: 5px 0px;
-    padding: 5px;
-    color: #f3f3f3;
 }
 
-#answer-list button:hover {
-    background: #2943da;
-    
+.btn {
+    border: 0px;
+    background: #557a95;
+    margin: 5px 0px;
+    padding: 7px;
+    color: #f3f3f3;
+    font-size: 15px;
+    border-radius: 5px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+#answer-list button:hover, .btn:hover {
+    background: #75b1d4;
 }
 
 #answer-response-box {
@@ -79,11 +119,25 @@
     justify-content: center;
 }
 
+#final-score-buttons {
+    margin-top: 10px;
+}
+
+#final-score-buttons button {
+    margin: 10px;
+}
+
+/* Change font and width of initials input value */
+#initials-input {
+    font-family: 'Press Start 2P', cursive;
+    width: 50px;
+}
+
 table {
     border-collapse: collapse;
-    border: 1px dotted #1495d1;
+    border: 1px dotted #659dbd;
     text-align: right;
-    
+    width: 35%;
 }
 
 tr:nth-child(even) {
@@ -91,7 +145,7 @@ tr:nth-child(even) {
 }
 
 th {
-    background-color: #1495d1;
+    background-color: #659dbd;
     color: #fefefe;
 }
 

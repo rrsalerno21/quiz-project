@@ -1,36 +1,3 @@
-// PSEUDO CODE
-
-// I need a start button that initializes the game, which includes
-    // A 60 second timer that exists in the upper right corner
-        // We'll need a variable that can be referenced across scopes
-    // Without changing the page, the first multiple choice question appears
-
-
-// I need an array of multiple choice questions with at least 4 possible answers
-    // Use objects to store 1.)questions, 2.)their answers in an array, and 3.) the correct answer's index in that array
-    // Put all of those questions into an array and randomly select from that array
-
-// When the start game button is clicked, I need a function to dynamically render the questions, their answers, and buttons that associate with the answer's array index
-    // I need a delegated Event Listener over the buttons that when clicked
-        // invokes a function that determines if it's a correct answer and displays the appropriate message at the bottom using a setInterval Timer
-            // if it's correct, then displays a "Correct Answer!"
-            // if it's incorrect, then displays "Wrong Answer" and subtracts x amount of time from the game timer
-        // re-renders the page with the next question
-
-
-// When the game timer ends or all of the questions have been answered
-    // Then the final score is display dynamically
-    // the user is prompeted to input their initials and hit submit
-
-// When they submit their score, I need to take the user to a new page that contains a list of high scores, sorted from highest to lowest
-    // The list needs to be stored locally
-    // The list needs to be sorted from highest to lowest 
-    // I need to have two buttons available beneath the list
-        // Clear high scores => clears the local storage
-        // Play Again => 
-            // Takes the user back to the index page
-            
-
 // Global Variables
 var JSONhighScores = JSON.parse(localStorage.getItem('highScoresStored'));
 var storage, highScores;
@@ -47,9 +14,27 @@ if (JSONhighScores === null) {
 
 storage = {
     questions: [
-        {question: `Pickles!  Hi I'm a question 0!  This is the title of a question. `, answer_0: `I'm answer one!`, answer_1: `I'm answer two!`, answer_2: `I'm answer three!`, answer_3: `I'm answer four!`, correct_answer: 'answer_0'},
-        {question: `Man I wish I could eat a sandwich right now.  Hi I'm a question 1!  This is the title of a question. `, answer_0: `I'm answer one!`, answer_1: `I'm answer two!`, answer_2: `I'm answer three!`, answer_3: `I'm answer four!`, correct_answer: 'answer_0'},
-        {question: `Wow my imagination is subpar.  Hi I'm a question 2!  This is the title of a question. `, answer_0: `I'm answer one!`, answer_1: `I'm answer two!`, answer_2: `I'm answer three!`, answer_3: `I'm answer four!`, correct_answer: 'answer_0'}
+        {question: `What is the name of Mario's Brother? `, answer_0: `Antonio`, answer_1: `Frankie`, answer_2: `Geo`, answer_3: `Luigi`, correct_answer: 'answer_3'},
+        {question: `What is the square root of 144? `, answer_0: `11`, answer_1: `14`, answer_2: `12`, answer_3: `4`, correct_answer: 'answer_2'},
+        {question: `Sheldon Cooper is a character in which TV show? `, answer_0: `Futurama`, answer_1: `Big Ban Theory`, answer_2: `Friends`, answer_3: `Simpsons`, correct_answer: 'answer_1'},
+        {question: `What MLB team has won the most world series? `, answer_0: `Dodgers`, answer_1: `Yankees`, answer_2: `Cardinals`, answer_3: `Giants`, correct_answer: 'answer_1'},
+        {question: `Who wrote Moby Dick?`, answer_0: `Herman Melville`, answer_1: `Jane Eyre`, answer_2: `Mark Twain`, answer_3: `Charles Dickens`, correct_answer: 'answer_0'},
+        {question: `How many rings are on the Olympic flag?`, answer_0: `None`, answer_1: `4`, answer_2: `5`, answer_3: `7`, correct_answer: 'answer_2'},
+        {question: `How did Spider-Man get his powers?`, answer_0: `Military experiment gone awry`, answer_1: `Born with them`, answer_2: `Woke up with them after a strange dream`, answer_3: `Bitten by a radioactive spider`, correct_answer: 'answer_3'},
+        {question: `What are the tallest trees on Earth?`, answer_0: `Coast Redwood`, answer_1: `Coast Douglas Fir`, answer_2: `Giant Sequoia`, answer_3: `Sitka Spruce`, correct_answer: 'answer_0'},
+        {question: `Which war caused the greatest loss of life for Americans?`, answer_0: `WW1`, answer_1: `WW2`, answer_2: `Vietnam`, answer_3: `The American Civil War`, correct_answer: 'answer_3'},
+        {question: `Which country employed the first police woman?`, answer_0: `England`, answer_1: `USA`, answer_2: `France`, answer_3: `Australia`, correct_answer: 'answer_1'},
+        {question: `What is the world's most venomous fish?`, answer_0: `Scorpion fish`, answer_1: `Lion fish`, answer_2: `Stonefish`, answer_3: `Toadfish`, correct_answer: 'answer_2'},
+        {question: `When born, a Dalmatian puppy is always...?`, answer_0: `Black`, answer_1: `Black with white spots`, answer_2: `White`, answer_3: `White with black spots`, correct_answer: 'answer_2'},
+        {question: `Who is the only US President to resign?`, answer_0: `John Adams`, answer_1: `Ulysses S Grant`, answer_2: `Richard Nixon`, answer_3: `Herbert Hoover`, correct_answer: 'answer_2'},
+        {question: `2,3,5,7,11 are the first four what?`, answer_0: `Odd numbers`, answer_1: `Integers`, answer_2: `Composite Numbers`, answer_3: `Prime Numbers`, correct_answer: 'answer_3'},
+        {question: `What is the loudest animal on earth?`, answer_0: `African elephant`, answer_1: `Sperm whale`, answer_2: `Blue whale`, answer_3: `Indian elephant`, correct_answer: 'answer_2'},
+        {question: `How many sides does a rhombus have?`, answer_0: `4`, answer_1: `6`, answer_2: `8`, answer_3: `10`, correct_answer: 'answer_0'},
+        {question: `What is the main language spoken in Venezuela?`, answer_0: `Spanish`, answer_1: `Portuguese`, answer_2: `French`, answer_3: `Italian`, correct_answer: 'answer_0'},
+
+
+       
+
     ],
 
     randomCheckArray: [],
@@ -112,7 +97,7 @@ $(document).ready(function() {
             // Display the next random question
             var questionBox = document.getElementById('question-div-box');
     
-            questionBox.innerHTML = (`<h2 class="question-title">${nextQuestion.question}</h2><div id="answer-list"><button class="ans-btn" id="answer_0" value="1">1.)  ${nextQuestion.answer_0}</button><button class="ans-btn" id="answer_1">2.)  ${nextQuestion.answer_1}</button><button class="ans-btn" id="answer_2">3.)  ${nextQuestion.answer_2}</button><button class="ans-btn" id="answer_3">4.)  ${nextQuestion.answer_3}</button></div>`);
+            questionBox.innerHTML = (`<h2 class="question-title">${nextQuestion.question}</h2><div id="answer-list"><button class="ans-btn btn" id="answer_0" value="1">1.)  ${nextQuestion.answer_0}</button><button class="ans-btn btn" id="answer_1">2.)  ${nextQuestion.answer_1}</button><button class="ans-btn btn" id="answer_2">3.)  ${nextQuestion.answer_2}</button><button class="ans-btn btn" id="answer_3">4.)  ${nextQuestion.answer_3}</button></div>`);
         };
     
         // Stop game and submit screen function
