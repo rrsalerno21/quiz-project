@@ -31,6 +31,7 @@ a:visited, a {
     text-align: center;
 }
 
+/* set main wrapper margin */
 .wrapper {
     margin: 0px 10px;
 }
@@ -41,11 +42,12 @@ a:visited, a {
 }
 
 
-
+/* class to hide elements */
 .hide {
     display: none;
 }
 
+/* position the high score link in the upper left*/
 #view-score-box {
     position: absolute;
     left: 0px;
@@ -53,6 +55,7 @@ a:visited, a {
     margin: 20px;
 }
 
+/* position the high score link in the upper right*/
 #timer-box {
     position: absolute;
     right: 0px;
@@ -61,35 +64,42 @@ a:visited, a {
     text-align: right;  
 }
 
+/* remove paragraph default margin */
 #timer-box p {
     margin: 0px;
 }
 
+/* Styling for the div that contains the questions */
 #question-div-box {
     text-align: left;
     margin: 20px auto;
     max-width: 700px;
 }
 
+/* text align the buttons to the left */
 #question-div-box button {
     text-align: left;
 }
 
+/* Style the question titles */
 .question-title {
     margin: 20px auto;
     font-size: 18px;
     line-height: 1.2em;
 }
 
+/* style the div that contains the answers */
 #answer-list {
     font-size: 18px;
     line-height: 2em;
 }
 
+/* make all the buttons blocks */
 #answer-list button {
     display: block;
 }
 
+/* Button styling */
 .btn {
     border: 0px;
     background: #557a95;
@@ -101,28 +111,34 @@ a:visited, a {
     font-family: 'Press Start 2P', cursive;
 }
 
+/* button hover styling */
 #answer-list button:hover, .btn:hover {
     background: #75b1d4;
 }
 
+/* add margin to the div that contains the computer's response to the user's answer choice */
 #answer-response-box {
     margin-top: 20px;
 }
 
+/* Remove margin from the answer response */
 #answer-response {
     margin: 0px;
 }
 
+/* set a class that flexes the div it's applied to */
 .flex-center {
     display: flex;
     flex-flow: row;
     justify-content: center;
 }
 
+/* add margin to the final score buttons div */
 #final-score-buttons {
     margin-top: 10px;
 }
 
+/* add margin to each final-score button */
 #final-score-buttons button {
     margin: 10px;
 }
@@ -133,6 +149,7 @@ a:visited, a {
     width: 50px;
 }
 
+/* Style the high score table*/
 table {
     border-collapse: collapse;
     border: 1px dotted #659dbd;
@@ -140,23 +157,28 @@ table {
     width: 35%;
 }
 
+/* apply an alternate background for each background */
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
+/* apply a blue background to the header of the table */
 th {
     background-color: #659dbd;
     color: #fefefe;
 }
 
+/* add cell padding to the table */
 td, th {
     padding: 5px 5px;
 }
 
+/* add margin to the div that contains the high score buttons */
 #score-buttons {
     margin: 20px;
 }
 
+/* add margin to separate the high score page buttons */
 #score-buttons button {
     margin: 10px;
 }

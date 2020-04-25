@@ -12,29 +12,33 @@
 <body data-title="high-scores-page">
 
     <div class="wrapper">
+        <!--H1 header-->
         <h1 class="text-align-center">View High Scores</h1>
 
-        <div class="flex-center" id="high-score-box">
+        <!--main section with high score box and buttons -->
+        <main class="flex-center" id="high-score-box">
             <table>
+                <!--column styling-->
                 <colgroup>
                     <col style="width: 50px;">
                     <col style="width: 75px;">
                     <col style="width: 75px;">
                 </colgroup>
                 <tr>
+                  <!--Table headers-->  
                   <th>Rank</th>
                   <th>Player</th>
                   <th>Score</th>
                 </tr>
-              </table>
+            </table>
 
-        </div>
+        </main>
 
-        <div class="flex-center" id="score-buttons">
+        <section class="flex-center" id="score-buttons">
             <button class="btn" id="go-back-btn"><a href="./index.html">Go Back</a></button>
             <button class="btn" id="clear-scores-btn">Clear High Scores</button>
 
-        </div>
+        </section>
 
     </div>
     <script src="./assets/script.js"></script>

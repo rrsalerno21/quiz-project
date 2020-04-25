@@ -11,22 +11,27 @@
 </head>
 <body data-title="quiz-page">
     <div class="wrapper">
-        <div id="view-score-box">
+        <!-- View High Scores Section Button-->
+        <section id="view-score-box">
             <a href="scores.html"><span class="btn" id="view-score-link">View High Scores</span></a>
-        </div>
+        </section>
 
-        <div id="timer-box" class="hide">
+        <!-- View Timer Section-->
+        <section id="timer-box" class="hide">
             <p>Timer: <span id="timer-display">60</span></p>
-        </div>
+        </section>
 
-        <section id="main" class="text-align-center">
-            <div id="intro-div">
+        <!-- Main code -->
+        <main id="main" class="text-align-center">
+            <!-- Introduction Section -->
+            <section id="intro-div">
                 <h1>Coding Quiz Challenge</h1>
                 <p>You have 60 seconds to answer 17 random questions.  You get one point for every question you answer correctly.  Answer incorrectly, and you'll lose 10 seconds.  Good luck!</p>
                 <button id="start-button" class="btn">Game On</button>
-            </div>
+            </section>
 
-            <div id="time-up-box" class="hide">
+            <!--Game Over screen to display when time is up or questions are all answered-->
+            <section id="time-up-box" class="hide">
                 <h2 id="game-over-heading" class="text-align-center">Time's Up!</h2>
                 <h3 id="final-score">Your Final Score: 0</h3>
                 <label for="initials">Your Initials</label>
@@ -37,23 +42,16 @@
                     <button class="btn" id="submit-score-button">Submit Score</button>
                 </div>
                
-            </div>
+            </section>
 
-            <div id="question-div-box" class="hide">
-                <!--
-                <h2 class="question-title">This is the title of a question.  What is the correct answer to what I'm going to ask?</h2>
-                <div id="answer-list">
-                    <button class="answer-button" id="answer_0">1.) I'm not really sure.</button>
-                    <button class="answer-button" id="answer_1">2.) I have absolutely no idea.</button>
-                    <button class="answer-button" id="answer_2">3.) I'm so sure that I know the answer</button>
-                    <button class="answer-button" id="answer_3">4.) I'm quiting your game already.</button>
-                </div>
+            <!-- Question section to appear when game is initialized-->
+            <section id="question-div-box" class="hide">
+                
+            </section>
 
-                -->
-            </div>
-
+            <!-- Div to appear in response to the user's answer selection -->
             <div id="answer-response-box"></div>
-        </section>
+        </main>
         
 
     </div>
