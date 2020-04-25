@@ -19,7 +19,9 @@ if ($('body').data('title') === 'high-scores-page') {
 }
 ```
 
-I'd never done this before, so I found it interesting.  I know that using modules is much better in practice, but I wanted to see if it's possible on a smaller web app with too much code.
+I'd never done this before, so I found it interesting.  I know that using modules is much better in practice, but I wanted to see if this was possible on a smaller web app without too much code.
 
 ## License
-MIT License
+Source code is licensed under the MIT license.
+
+Contents of this site are © Copyright 2020 Robert Salerno. All rights reserved.
