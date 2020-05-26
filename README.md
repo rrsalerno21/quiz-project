@@ -1,6 +1,7 @@
 # Random Quiz Project
 
- This is a web app game that features dynamically updated HTML and CSS powered by JavaScript code.  It asks the user a series of questions in random order that they have to answer in 60 seconds or less.  The user gets a point if they answer correctly.  If a question is answered incorrectly, the timer loses 10 seconds.
+ This is a web app game that features dynamically updated HTML and CSS powered by JavaScript code.  It asks the user a series of questions in random order that they have to answer in 60 seconds or less.  The user gets a point if they answer correctly.  If a question is answered incorrectly, the timer loses 10 seconds.  Deployed at [https://rrsalerno21.github.io/quiz-project/](https://rrsalerno21.github.io/quiz-project/)
+
 
 ## Technologies Used
 HTML, CSS, and Javascript/jQuery
